@@ -4,31 +4,36 @@ import com.example.testingapp.interfaces.Controlador
 import com.example.testingapp.interfaces.Inter.Operaciones
 import kotlin.math.roundToInt
 
-class Dialog {
-    private var listener : Operaciones? = null
-    private var accion : Int = 0;
-
-    //carga del listener para el botón
-    fun setListener(_listener : Operaciones) {
+class Dialog{
+    private var listener: Operaciones? = null  //Ya si eso lo creo.
+    //Carga el listener para el botón
+    fun setListener ( _listener : Operaciones){
         listener = _listener
+
     }
 
-    //Lo que muestra el dialogo
-    fun show(numberAction : Int){
-        listener?.let {
-            val posibleName = "No se, solo son pruebas"
-            val posibleID = (Math.random() + 99).roundToInt()
-            when(numberAction){
-                0 -> addClient()
-                1 -> onDelete(posibleID)
-                2 -> onEdit(posibleID,posibleName)
+    //muestra el dialogo
+    fun show(typeAction : Int){
+        listener?.let{
+            val posibleId = (Math.random() + 99).roundToInt()//me da un aleatorio. -1 está vacío para editar/borrar.
+            when (typeAction){
+                0 -> addClient() //simulamos que ahora pulsamos el botón aceptar de un nuevo
+
+                1 ->
+                    if (posibleId != -1)
+                        onEdit(posibleId, "CAMBIADO")
+
+                2 ->
+                    if (posibleId != -1)
+                        onDelete(posibleId)
+
             }
 
         }
     }
 
-    private fun addClient(id : Int = (Math.random() + 99).roundToInt(), nombre : String = "Ni puta idea"){
-        listener!!.clientAdd(id, nombre)
+    private fun addClient(id : Int = (Math.random() + 99).roundToInt(), nombre : String = "Ni puta idea", apellido : String = "Obra maestra", telefono : String = "cccccccccc"){
+        listener!!.clientAdd(id, nombre, apellido, telefono)
         listener.toString()
     }
 
@@ -37,9 +42,8 @@ class Dialog {
         listener.toString()
     }
 
-    private fun onEdit(id : Int, nombre : String){
-        listener!!.clientEdit(id, nombre)
+    private fun onEdit(id : Int, nombre : String, apellido : String = "Obra maestra", telefono : String = "cccccccccc"){
+        listener!!.clientEdit(id, nombre, apellido, telefono)
         listener.toString()
     }
-
 }

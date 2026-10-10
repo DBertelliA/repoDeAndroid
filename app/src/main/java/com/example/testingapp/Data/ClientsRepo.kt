@@ -7,9 +7,9 @@ class ClientsRepo {
         var primaryId = 1;
 
         val listaCLientes : List<Client> = listOf(
-            Client(ClientsRepo.autoIncrement(), "patata"),
-            Client(ClientsRepo.autoIncrement(), "cebollas"),
-            Client(ClientsRepo.autoIncrement(), "ajos")
+            Client(ClientsRepo.autoIncrement(), "patata", "Caliente", "123456789"),
+            Client(ClientsRepo.autoIncrement(), "cebollas", "Caramelizada", "987654321"),
+            Client(ClientsRepo.autoIncrement(), "ajos", "Ricos", "213456879")
         )
 
         fun autoIncrement() : Int = primaryId++
